@@ -4,13 +4,6 @@ import { ApiConnectorProvider } from '../../providers/api-connector/api-connecto
 import moment from 'moment';
 import { LoadingProvider } from '../../providers/loading/loading';
 
-/**
- * Generated class for the MovieDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @Component({
   selector: 'page-movie-detail',
   templateUrl: 'movie-detail.html',
@@ -24,10 +17,11 @@ export class MovieDetailPage {
   sessionDates          = [];
   noSessionsMessage     = '';
   loading;
+  loadingData = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiConnector: ApiConnectorProvider, public loadingProvider: LoadingProvider) {
-    this.loading = this.loadingProvider.initialize();
-    this.loadingProvider.show(this.loading);
+    // this.loading = this.loadingProvider.initialize();
+    // this.loadingProvider.show(this.loading);
 
     this.movie  = navParams.data.movie;
     this.cityId = navParams.data.cityId;
@@ -45,6 +39,7 @@ export class MovieDetailPage {
     t.theaters          = [];
     t.noSessionsMessage = '';
 
+    this.loadingData = true;
     this.apiConnector
       .getTheatersByMovie(t.cityId, t.movie.id, date)
       .subscribe(
@@ -59,7 +54,8 @@ export class MovieDetailPage {
           console.error('Error on getting theater by movie.');
         },
         () => {
-          this.loadingProvider.hide(this.loading);
+          this.loadingData = false;
+          // this.loadingProvider.hide(this.loading);
         }
       );
   }
@@ -73,8 +69,8 @@ export class MovieDetailPage {
   }
 
   onChangeSessionDate(event) {
-    this.loading = this.loadingProvider.initialize();
-    this.loadingProvider.show(this.loading);
+    // this.loading = this.loadingProvider.initialize();
+    // this.loadingProvider.show(this.loading);
     this.getTheatersByMovie();
   }
 }

@@ -1,24 +1,13 @@
-<!--
-  Generated template for the MovieDetailPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>{{movie.title}}</ion-title>
+<ion-header no-border>
+  <ion-navbar transparent>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content>
-  <ion-grid>
+  <ion-grid no-padding>
     <ion-row>
       <ion-col col-12>
-        <div padding>
-          <img [src]="movie.images[1].url" />
+        <div text-center>
+          <movie [movie]="movie"></movie>
           <div>
             <strong>Classificação:</strong> {{movie.contentRating}}
           </div>
@@ -29,6 +18,8 @@
             <strong>Gênero:</strong><span *ngFor="let genre of movie.genres"> {{genre}}</span>
           </div>
         </div>
+      </ion-col>
+      <ion-col col-12>
         <ion-segment [(ngModel)]="segmentSessionDates" color="primary" (ionChange)="onChangeSessionDate($event)">
           <ion-segment-button *ngFor="let date of sessionDates" [value]="date">
             {{date}}
@@ -36,10 +27,15 @@
         </ion-segment>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col [hidden]="theaters.length" padding>{{noSessionsMessage}}</ion-col>
+    <ion-row [hidden]="!loadingData">
+      <div class="spinner">
+        <div class="dot1"></div>
+        <div class="dot2"></div>
+        <div class="dot3"></div>
+      </div>
     </ion-row>
-    <ion-row>
+    <ion-row padding *ngIf="!loadingData">
+      <ion-col *ngIf="!theaters.length" padding>{{noSessionsMessage}}</ion-col>
       <ion-col *ngFor="let theater of theaters"
         col-12 col-sm-6 col-md-4>
         <session-information [theater]="theater"></session-information>

@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <h1>ADRIANO GATS</h1>
   <!-- <ion-item>
     <ion-label>Estado:</ion-label>
     <ion-select [(ngModel)]="state">
@@ -17,6 +18,20 @@
     </ion-select>
 
   </ion-item> -->
+  <!-- <ion-list radio-group [(ngModel)]="relationship">
+    <ion-item>
+      <ion-label>Friends</ion-label>
+      <ion-radio color="danger" value="friends" checked></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Family</ion-label>
+      <ion-radio value="family"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Enemies</ion-label>
+      <ion-radio value="enemies" [disabled]="isDisabled"></ion-radio>
+    </ion-item>
+  </ion-list> -->
   <ion-grid>
     <ion-row>
       <ion-col col-6 col-md-4 col-lg-2 *ngFor="let movie of movies">
